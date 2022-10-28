@@ -8,21 +8,24 @@ newGameButton.textContent = "Play Game";
 newGameButton.addEventListener('click', playGame);
 gameDiv.appendChild(newGameButton);
 
+const score = document.createElement('div');
+score.setAttribute('id', 'score')
+
 function getPlayerChoice() {
     const rock = document.createElement('div');
     rock.textContent = 'ROCK';
     rock.classList.add('button');
-    rock.addEventListener('click', () => console.log(playRound('rock')));
+    rock.addEventListener('click', () => playRound('rock'));
     
     const paper = document.createElement('div');
     paper.textContent = 'PAPER';
     paper.classList.add('button');
-    paper.addEventListener('click', () => console.log(playRound('paper')));
+    paper.addEventListener('click', () => playRound('paper'));
     
     const scissors = document.createElement('div');
     scissors.textContent = 'SCISSORS';
     scissors.classList.add('button');
-    scissors.addEventListener('click', () => console.log(playRound('scissors')));
+    scissors.addEventListener('click', () => playRound('scissors'));
     
     gameDiv.appendChild(paper);
     gameDiv.appendChild(rock);
@@ -43,31 +46,30 @@ function getComputerChoice() {
 function playRound(playerSelection) {
 
     const computerSelection = getComputerChoice();
-
+    
     console.log(`Player: ${playerSelection}`);
     console.log(`Computer: ${computerSelection}`);
 
     switch (playerSelection) {
         case computerSelection:
-            return "It's a DRAW!";
+            break;
         case "rock":
             computerSelection === "scissors" ? playerScore++ : computerScore++;
-            return computerSelection === "scissors" ? "You WON!" : "You LOST!";
+            break;
         case "paper":
             computerSelection === "rock" ? playerScore++ : computerScore++;
-            return computerSelection === "rock" ? "You WON!" : "You LOST!";
+            break;
         case "scissors":
             computerSelection === "paper" ? playerScore++ : computerScore++;
-            return computerSelection === "paper" ? "You WON!" : "You LOST!";
-        default:
-            return "You need to focus.";
+            break;
     }
+    score.textContent = "Player: " + playerScore + " Computer: " + computerScore;
 }
 
 function playGame(){
     newGameButton.remove();
     playerScore = 0;
     computerScore = 0;
-
+    gameDiv.appendChild(score);
     getPlayerChoice();
 }

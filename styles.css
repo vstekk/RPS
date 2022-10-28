@@ -1,0 +1,38 @@
+body {
+    background-color: brown;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+.wrapper p {
+    text-align: center;
+}
+
+.wrapper {
+    border: 1px solid yellow;
+    width: 45rem;
+    margin: auto;
+    padding: 20px;
+}
+
+#game {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    background-color: blanchedalmond;
+    text-align: center;
+    padding: .5rem;
+    font-size: 2rem;
+}
+
+.button:hover {
+    background-color: antiquewhite;
+    color: red;
+    font-weight: bold;
+}

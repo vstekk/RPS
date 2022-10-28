@@ -11,25 +11,26 @@ gameDiv.appendChild(newGameButton);
 const score = document.createElement('div');
 score.setAttribute('id', 'score')
 
+const playerChoice = document.createElement('div');
+const rock = document.createElement('div');
+rock.textContent = 'ROCK';
+rock.classList.add('button');
+rock.addEventListener('click', () => playRound('rock'));
+const paper = document.createElement('div');
+paper.textContent = 'PAPER';
+paper.classList.add('button');
+paper.addEventListener('click', () => playRound('paper'));
+const scissors = document.createElement('div');
+scissors.textContent = 'SCISSORS';
+scissors.classList.add('button');
+scissors.addEventListener('click', () => playRound('scissors'));
+
+playerChoice.appendChild(rock);
+playerChoice.appendChild(paper);
+playerChoice.appendChild(scissors)
+
 function getPlayerChoice() {
-    const rock = document.createElement('div');
-    rock.textContent = 'ROCK';
-    rock.classList.add('button');
-    rock.addEventListener('click', () => playRound('rock'));
-    
-    const paper = document.createElement('div');
-    paper.textContent = 'PAPER';
-    paper.classList.add('button');
-    paper.addEventListener('click', () => playRound('paper'));
-    
-    const scissors = document.createElement('div');
-    scissors.textContent = 'SCISSORS';
-    scissors.classList.add('button');
-    scissors.addEventListener('click', () => playRound('scissors'));
-    
-    gameDiv.appendChild(paper);
-    gameDiv.appendChild(rock);
-    gameDiv.appendChild(scissors);
+    gameDiv.appendChild(playerChoice);
 }
 
 function getComputerChoice() {
@@ -46,9 +47,6 @@ function getComputerChoice() {
 function playRound(playerSelection) {
 
     const computerSelection = getComputerChoice();
-    
-    console.log(`Player: ${playerSelection}`);
-    console.log(`Computer: ${computerSelection}`);
 
     switch (playerSelection) {
         case computerSelection:

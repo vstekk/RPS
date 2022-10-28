@@ -12,6 +12,7 @@ const score = document.createElement('div');
 score.setAttribute('id', 'score')
 
 const playerChoice = document.createElement('div');
+playerChoice.classList.add('choices');
 const rock = document.createElement('div');
 rock.textContent = 'ROCK';
 rock.classList.add('button');
@@ -29,8 +30,12 @@ playerChoice.appendChild(rock);
 playerChoice.appendChild(paper);
 playerChoice.appendChild(scissors)
 
+const result = document.createElement('div');
+result.setAttribute('id', 'result');
+
 function getPlayerChoice() {
     gameDiv.appendChild(playerChoice);
+    gameDiv.appendChild(result);
 }
 
 function getComputerChoice() {
@@ -62,6 +67,10 @@ function playRound(playerSelection) {
             break;
     }
     score.textContent = "Player: " + playerScore + " Computer: " + computerScore;
+    result.textContent = "Player: " + playerSelection + " Computer: " + computerSelection;
+    if (playerScore + computerScore === 5) {
+        endGame();
+    }
 }
 
 function playGame(){
@@ -70,4 +79,11 @@ function playGame(){
     computerScore = 0;
     gameDiv.appendChild(score);
     getPlayerChoice();
+}
+
+function endGame(){
+    playerChoice.remove();
+    score.remove();
+    result.textContent = playerScore > computerScore ? 'You WON!' : 'You LOST!';
+    gameDiv.appendChild(newGameButton);
 }

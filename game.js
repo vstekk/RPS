@@ -1,41 +1,36 @@
 let playerScore = 0;
 let computerScore = 0;
 
-const gameDiv = document.getElementById('game');
-const newGameButton = document.createElement('div');
-newGameButton.classList.add("button");
-newGameButton.textContent = "Play Game";
+const newGameButton = document.getElementById('start');
+const playerDiv = document.getElementById('player');
+const computerDiv = document.getElementById('computer');
+const scoreDiv = document.getElementById('score');
+const resultDiv = document.getElementById('result');
+const choicesDiv = document.getElementById('choices');
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const computerSelectionDiv = document.getElementById('computerSelection');
+const playerScoreDiv = document.getElementById('playerScore');
+const computerScoreDiv = document.getElementById('computerScore');
+
 newGameButton.addEventListener('click', playGame);
-gameDiv.appendChild(newGameButton);
-
-const score = document.createElement('div');
-score.setAttribute('id', 'score')
-
-const playerChoice = document.createElement('div');
-playerChoice.classList.add('choices');
-const rock = document.createElement('div');
-rock.textContent = 'ROCK';
-rock.classList.add('button');
 rock.addEventListener('click', () => playRound('rock'));
-const paper = document.createElement('div');
-paper.textContent = 'PAPER';
-paper.classList.add('button');
 paper.addEventListener('click', () => playRound('paper'));
-const scissors = document.createElement('div');
-scissors.textContent = 'SCISSORS';
-scissors.classList.add('button');
 scissors.addEventListener('click', () => playRound('scissors'));
 
-playerChoice.appendChild(rock);
-playerChoice.appendChild(paper);
-playerChoice.appendChild(scissors)
+function playGame(){
+    newGameButton.classList.add('hidden');
+    resultDiv.classList.add('hidden');
 
-const result = document.createElement('div');
-result.setAttribute('id', 'result');
+    playerScore = 0;
+    computerScore = 0;
+    updateScoreDiv();
 
-function getPlayerChoice() {
-    gameDiv.appendChild(playerChoice);
-    gameDiv.appendChild(result);
+    playerDiv.classList.remove('hidden')
+    computerDiv.classList.remove('hidden')
+    scoreDiv.classList.remove('hidden');
+    choicesDiv.classList.remove('hidden');
 }
 
 function getComputerChoice() {
@@ -49,41 +44,59 @@ function getComputerChoice() {
     }
 }
 
+function updateScoreDiv(){
+    playerScoreDiv.textContent = playerScore;
+    computerScoreDiv.textContent = computerScore;
+}
+
 function playRound(playerSelection) {
 
     const computerSelection = getComputerChoice();
+    computerSelectionDiv.textContent = computerSelection;
+    computerSelectionDiv.classList.remove('hidden');
 
     switch (playerSelection) {
         case computerSelection:
+            resultDiv.textContent = "It's a DRAW";
             break;
         case "rock":
-            computerSelection === "scissors" ? playerScore++ : computerScore++;
+            if (computerSelection === "scissors"){
+                playerScore++
+                resultDiv.textContent = "You WON!";
+            } else {
+                computerScore++;
+                resultDiv.textContent = "You LOST!";
+            }
             break;
         case "paper":
-            computerSelection === "rock" ? playerScore++ : computerScore++;
+            if (computerSelection === "rock"){
+                playerScore++
+                resultDiv.textContent = "You WON!";
+            } else {
+                computerScore++;
+                resultDiv.textContent = "You LOST!";
+            }
             break;
         case "scissors":
-            computerSelection === "paper" ? playerScore++ : computerScore++;
+            if (computerSelection === "paper"){
+                playerScore++
+                resultDiv.textContent = "You WON!";
+            } else {
+                computerScore++;
+                resultDiv.textContent = "You LOST!";
+            }
             break;
     }
-    score.textContent = "Player: " + playerScore + " Computer: " + computerScore;
-    result.textContent = "Player: " + playerSelection + " Computer: " + computerSelection;
+    updateScoreDiv();
+    resultDiv.classList.remove('hidden');
     if (playerScore + computerScore === 5) {
         endGame();
     }
 }
 
-function playGame(){
-    newGameButton.remove();
-    playerScore = 0;
-    computerScore = 0;
-    gameDiv.appendChild(score);
-    getPlayerChoice();
-}
-
 function endGame(){
-    playerChoice.remove();
-    score.remove();
-    result.textContent = playerScore > computerScore ? 'You WON!' : 'You LOST!';
-    gameDiv.appendChild(newGameButton);
+    choicesDiv.classList.add('hidden');
+    computerSelectionDiv.classList.add('hidden');
+    resultDiv.textContent = playerScore > computerScore ? 'You WON!' : 'You LOST!';
+    newGameButton.classList.remove('hidden');
 }

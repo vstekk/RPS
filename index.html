@@ -10,8 +10,31 @@
 </head>
 <body>
     <div class="wrapper">
-        <h1>rock-paper-scissors</h1>
-        <div id="game"></div>
+        <h1>ROCK PAPER SCISSORS</h1>
+        <div class="content">
+            <div id="player" class="hidden column">
+                <h2>PLAYER</h2>
+                <div id="choices">
+                    <div id="rock" class="button">rock</div>
+                    <div id="paper" class="button">paper</div>
+                    <div id="scissors" class="button">scissors</div>
+                </div>
+    
+            </div>
+            <div class="column">
+                <div id="score" class="hidden">
+                    <span id="playerScore"></span>
+                    <span>:</sp>
+                    <span id="computerScore"></span>
+                </div>
+                <div id="result"></div> 
+                <div id="start" class="button">START GAME</div>
+            </div>
+            <div id="computer"  class="hidden column">
+                <h2>COMPUTER</h2>
+                <div id="computerSelection" class="hidden button"></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

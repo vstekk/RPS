@@ -22,6 +22,7 @@ scissors.addEventListener('click', () => playRound('scissors'));
 function playGame(){
     newGameButton.classList.add('hidden');
     resultDiv.classList.add('hidden');
+    removeLatest();
 
     playerScore = 0;
     computerScore = 0;
@@ -49,7 +50,26 @@ function updateScoreDiv(){
     computerScoreDiv.textContent = computerScore;
 }
 
+function resolvePlayerWon(){
+    playerScore++
+    resultDiv.textContent = "You WON!";
+}
+function resolveComputerWon(){
+    computerScore++;
+    resultDiv.textContent = "You LOST!";
+}
+
+function removeLatest(){
+    const allLatest = [...(choicesDiv.getElementsByClassName('latest'))];
+    allLatest.forEach(latest => {
+        latest.classList.remove('latest');
+    });
+}
+
 function playRound(playerSelection) {
+
+    removeLatest();
+    document.getElementById(playerSelection).classList.add('latest');
 
     const computerSelection = getComputerChoice();
     computerSelectionDiv.textContent = computerSelection;
@@ -59,44 +79,26 @@ function playRound(playerSelection) {
         case computerSelection:
             resultDiv.textContent = "It's a DRAW";
             break;
-        case "rock":
-            if (computerSelection === "scissors"){
-                playerScore++
-                resultDiv.textContent = "You WON!";
-            } else {
-                computerScore++;
-                resultDiv.textContent = "You LOST!";
-            }
+        case "rock": 
+            computerSelection === "scissors" ? resolvePlayerWon() : resolveComputerWon();
             break;
         case "paper":
-            if (computerSelection === "rock"){
-                playerScore++
-                resultDiv.textContent = "You WON!";
-            } else {
-                computerScore++;
-                resultDiv.textContent = "You LOST!";
-            }
+            computerSelection === "rock" ? resolvePlayerWon() : resolveComputerWon();
             break;
         case "scissors":
-            if (computerSelection === "paper"){
-                playerScore++
-                resultDiv.textContent = "You WON!";
-            } else {
-                computerScore++;
-                resultDiv.textContent = "You LOST!";
-            }
+            computerSelection === "paper" ? resolvePlayerWon() : resolveComputerWon();
             break;
     }
     updateScoreDiv();
+
     resultDiv.classList.remove('hidden');
-    if (playerScore + computerScore === 5) {
+    if (playerScore === 3 || computerScore === 3) {
         endGame();
     }
 }
 
 function endGame(){
     choicesDiv.classList.add('hidden');
-    computerSelectionDiv.classList.add('hidden');
     resultDiv.textContent = playerScore > computerScore ? 'You WON!' : 'You LOST!';
     newGameButton.classList.remove('hidden');
 }

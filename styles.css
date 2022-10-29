@@ -52,7 +52,7 @@ h2 {
     font-weight: 800;
 }
 
-.button {
+.button, .selection{
     background-color: blanchedalmond;
     text-align: center;
     padding: .5rem;
@@ -61,8 +61,19 @@ h2 {
     width: 100%;
 }
 
+#choices .latest{
+    background-color: pink;
+}
+
 .button:hover {
     background-color: yellow;
     color: red;
     font-weight: bold;
+    cursor: pointer;
+}
+
+
+
+p {
+    text-align: right;
 }
